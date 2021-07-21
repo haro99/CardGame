@@ -25,13 +25,14 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private GameObject[] Select, CpuSelect;            //選んだ2枚のカード
     
-    public int choiceCount, Total, recrdnumber1, recrdnumber2;          //選んだ枚数（2枚）、一致してないカードのトータル, CPUレコードから取り出す位置のナンバー
+    public int choiceCount, Total, recrdnumber1, recrdnumber2, player, cpu;          //選んだ枚数（2枚）、一致してないカードのトータル, CPUレコードから取り出す位置のナンバー
     [SerializeField]
-    private bool isplyaerjudge, iscpujudge, play;              //カードの判定中のフラグ、タイマースタートするフラグ
+    private bool isplyaerjudge, iscpujudge;              //カードの判定中のフラグ、タイマースタートするフラグ
     public AudioSource audioSource;         //一致した時のSE
     [SerializeField]
     public Turn nowturn;
-    public Text TurnNameUI;
+    public GameObject Btn;
+    public Text PlyaerCardnumber, CpuCardnumber;
 
     // Start is called before the first frame update
     void Start()
@@ -74,8 +75,12 @@ public class GameManager : MonoBehaviour
                     if (!iscpujudge)
                         CpuTurn();
                     if (Total < 3)
+                    {
                         nowturn = Turn.GameEnd;
-                break;
+                        StopAllCoroutines();
+                        Btn.SetActive(true);
+                    }
+                    break;
         }
     }
 
@@ -98,6 +103,8 @@ public class GameManager : MonoBehaviour
                 CpuCardRecord.Remove(Choicses[i]);
             }
             Total -= 2;
+            player+=2;
+            PlyaerCardnumber.text = player.ToString();
         }
         else
         {
@@ -133,6 +140,8 @@ public class GameManager : MonoBehaviour
                 CpuCardRecord.Remove(Choicses[i]);
             }
             Total -= 2;
+            cpu+=2;
+            CpuCardnumber.text = cpu.ToString();
         }
         else
         {
@@ -250,7 +259,7 @@ public class GameManager : MonoBehaviour
     {
         CpuSelect[0] = CpuCardRecord[recrdnumber1];
         CpuSelect[1] = CpuCardRecord[recrdnumber2];
-        if (CpuSelect[0] != Select[0] && CpuSelect[0] != Select[1] && CpuSelect[1] != Select[0] && CpuSelect[1] != Select[1])
+        if (CpuCheck())
         {
             CpuSelect[0].GetComponent<Card>().Touch();
             yield return new WaitForSeconds(1);
@@ -274,7 +283,7 @@ public class GameManager : MonoBehaviour
         CpuSelect[0] = SetCards[number1];
         CpuSelect[1] = SetCards[number2];
 
-        if (CpuSelect[0] != Select[0] || CpuSelect[0] != Select[1] || CpuSelect[1] != Select[0] || CpuSelect[1] != Select[1])
+        if (CpuSelect[0] != Select[0] && CpuSelect[0] != Select[1] && CpuSelect[1] != Select[0] && CpuSelect[1] != Select[1])
         {
             CpuSelect[0].gameObject.GetComponent<Card>().Touch();
             yield return new WaitForSeconds(1);
@@ -288,6 +297,7 @@ public class GameManager : MonoBehaviour
             CpuSelect[0] = null;
             CpuCardRecord.Remove(CpuSelect[1]);
             CpuSelect[1] = null;
+            yield return new WaitForSeconds(1);
             iscpujudge = false;
         }
     }
@@ -300,5 +310,18 @@ public class GameManager : MonoBehaviour
                 return true;
         }
         return false;
+    }
+
+    bool CpuCheck()
+    {
+        for (int i = 0; i < CpuSelect.Length; i++)
+        {
+            for (int j = 0; j < Select.Length; j++)
+            {
+                if (CpuSelect[i] == Select[j])
+                    return false;
+            }
+        }
+        return true;
     }
 }

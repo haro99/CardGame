@@ -162,9 +162,9 @@ PlayerSettings:
     Android: com.harohani.CardGame
     Standalone: com.Company.ProductName
   buildNumber: {}
-  AndroidBundleVersionCode: 4
-  AndroidMinSdkVersion: 28
-  AndroidTargetSdkVersion: 0
+  AndroidBundleVersionCode: 5
+  AndroidMinSdkVersion: 21
+  AndroidTargetSdkVersion: 29
   AndroidPreferredInstallLocation: 1
   aotOptions: 
   stripEngineCode: 1
@@ -255,8 +255,8 @@ PlayerSettings:
   AndroidTargetArchitectures: 3
   AndroidSplashScreenScale: 0
   androidSplashScreen: {fileID: 0}
-  AndroidKeystoreName: "{dedicated}: Documents/\u03B2user.keystore"
-  AndroidKeyaliasName: test
+  AndroidKeystoreName: '{dedicated}: Documents/Releaseuser.keystore'
+  AndroidKeyaliasName: release
   AndroidBuildApkPerCpuArchitecture: 0
   AndroidTVCompatibility: 0
   AndroidIsGame: 1

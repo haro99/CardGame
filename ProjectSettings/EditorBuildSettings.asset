@@ -5,22 +5,22 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/GameTitle.unity
     guid: 9e51e7b283201ed478a34c4dfcfb08ba
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/GameMain.unity
     guid: 1beee4c85346c6842b3982ed6df9a2d2
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/GameSelect.unity
     guid: ce4f0c1e1d3c3f941b3e18d6ba6f3a18
-  - enabled: 1
+  - enabled: 0
     path: Assets/Golf/Golf.unity
     guid: 4cbacfbcf9c36684d931015dd5ae9517
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Pyramid.unity
     guid: b3540460a162e5a47a63a2660021af80
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/MatchingScene.unity
     guid: 48d98d0a2f0314a4995fe133afbf9df7
   m_configObjects: {}

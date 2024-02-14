@@ -12,7 +12,7 @@ public class Cards : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GameManagerPyramid = GameObject.Find("GameManager").GetComponent<GameManagerPyramid>();
+        //GameManagerPyramid = GameObject.Find("GameManager").GetComponent<GameManagerPyramid>();
 
     }
 

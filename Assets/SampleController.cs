@@ -53,6 +53,21 @@ public class SampleController : MonoBehaviourPunCallbacks
             GameObject Card = PhotonNetwork.Instantiate("c" + i.ToString("00"), new Vector3(-9f + i * 1.5f, 3f, 0f), Quaternion.identity);
             Cards.Add(Card);
         }
+        for (int i = 1; i <= 13; i++)
+        {
+            GameObject Card = PhotonNetwork.Instantiate("d" + i.ToString("00"), new Vector3(-9f + i * 1.5f, 1f, 0f), Quaternion.identity);
+            Cards.Add(Card);
+        }
+        for (int i = 1; i <= 13; i++)
+        {
+            GameObject Card = PhotonNetwork.Instantiate("h" + i.ToString("00"), new Vector3(-9f + i * 1.5f, -1f, 0f), Quaternion.identity);
+            Cards.Add(Card);
+        }
+        for (int i = 1; i <= 13; i++)
+        {
+            GameObject Card = PhotonNetwork.Instantiate("s" + i.ToString("00"), new Vector3(-9f + i * 1.5f, -3f, 0f), Quaternion.identity);
+            Cards.Add(Card);
+        }
 
         CardShuffle();
     }

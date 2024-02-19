@@ -10,11 +10,13 @@ GameObject:
   m_Component:
   - component: {fileID: 1310492331498819480}
   - component: {fileID: 709734875298341715}
-  - component: {fileID: 4210897781490529633}
+  - component: {fileID: -1036308223208207606}
   - component: {fileID: -5478771947522264386}
+  - component: {fileID: 7940266997658614488}
+  - component: {fileID: -5233570896381645504}
   m_Layer: 0
   m_Name: s06
-  m_TagString: Untagged
+  m_TagString: Card
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -28,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 7813144255071790438}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -73,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: e2f6223f0419dd44eb360195a1e12620, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 338b8e5cb2cb1d14ab9605e94f6e5a3b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -84,7 +86,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &4210897781490529633
+--- !u!114 &-1036308223208207606
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -93,18 +95,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 7813144255071790438}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe2846bfbcb3dcf469760bf52a5955e6, type: 3}
+  m_Script: {fileID: 11500000, guid: 76d4a43e4c110bf43bb902d95bad9d63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GameManagerPyramid: {fileID: 0}
-  ImageNumber: {fileID: 21300000, guid: 3a54ba56092947048ba2c1387e0a72c4, type: 3}
-  closeImage: {fileID: 21300000, guid: 34d055c861458f84f81f4bb9f46ecfaa, type: 3}
-  cardnumber: 6
-  classnumber: 0
-  setnumber: 0
+  StarEffect: {fileID: 0}
+  CloseImage: {fileID: 21300000, guid: e2f6223f0419dd44eb360195a1e12620, type: 3}
+  OpenImage: {fileID: 21300000, guid: ea55ef420a1301f49b31b45fcf43785a, type: 3}
+  SE: {fileID: 0}
+  Colloder: {fileID: -6272689771936878936, guid: a36de379528393c479d92c4e8f91cc1d,
+    type: 3}
   number: 0
-  collider2D: {fileID: -5478771947522264386}
-  open: 0
 --- !u!61 &-5478771947522264386
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -112,7 +112,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7813144255071790438}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -122,7 +122,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.6816667, y: 1}
+    oldSize: {x: 0.66, y: 0.84}
     newSize: {x: 0.6816667, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -131,3 +131,42 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.66, y: 0.84}
   m_EdgeRadius: 0
+--- !u!114 &7940266997658614488
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7813144255071790438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents:
+  - {fileID: -5233570896381645504}
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
+--- !u!114 &-5233570896381645504
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7813144255071790438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0
+  m_UseLocal: 1

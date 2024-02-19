@@ -8,7 +8,9 @@ using Photon.Realtime;
 
 public class AvatarScript : MonoBehaviourPunCallbacks, IPunTurnManagerCallbacks
 {
-    PunTurnManager punTurnManager = default;
+    private PunTurnManager punTurnManager = default;
+    private SampleController GameManager;
+    private bool isplay;
 
     void Awake()
     {
@@ -17,11 +19,35 @@ public class AvatarScript : MonoBehaviourPunCallbacks, IPunTurnManagerCallbacks
 
     void Start()
     {
+        isplay = false;
         this.punTurnManager = this.gameObject.AddComponent<PunTurnManager>();//PunTurnManagerをコンポーネントに追加
-
+        GameManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<SampleController>();
         Button button = GameObject.Find("NextTurn").GetComponent<Button>();
         button.onClick.AddListener(OnClickButton);
         SetupTurnManager();
+    }
+
+    private void Update()
+    {
+        if(isplay)
+        {
+            if(Input.GetMouseButtonDown(0))
+            {
+                Debug.Log("Click!");
+                //レイの生成
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+                RaycastHit2D hit = Physics2D.Raycast((Vector2)ray.origin, ray.direction, 12f);
+
+                if (hit.collider)
+                {
+                    Debug.Log(hit.collider.gameObject.name);
+                    GameObject HitObject = hit.collider.gameObject;
+                    HitObject.GetComponent<Card>().Touch();
+                    GameManager.CardSerach(HitObject);
+                }
+            }
+        }
     }
 
     public void OnClick()
@@ -49,13 +75,13 @@ public class AvatarScript : MonoBehaviourPunCallbacks, IPunTurnManagerCallbacks
         if (PhotonNetwork.CurrentRoom.PlayerCount >= 1)
         {
             Debug.Log("プレイヤーが揃いました！ゲームを開始します");
+            GameObject.Find("MatchingText").SetActive(false);
 
             if (PhotonNetwork.IsMasterClient)
             {
                 Debug.Log("マスタークライアントです");
-                SampleController controller = GameObject.Find("GameObject").GetComponent<SampleController>();
-
-                controller.Set();
+                
+                GameManager.Set();
                 punTurnManager.BeginTurn();
             }
             else
@@ -70,7 +96,12 @@ public class AvatarScript : MonoBehaviourPunCallbacks, IPunTurnManagerCallbacks
         Debug.Log("ターンを開始します" + turn);
         if (PhotonNetwork.IsMasterClient)
         {
-            Debug.Log(punTurnManager.Turn);
+            Debug.Log("クライアントマスターのターンです");
+            isplay = true;
+        }
+        else
+        {
+            isplay = false;
         }
     }
 
@@ -112,12 +143,16 @@ public class AvatarScript : MonoBehaviourPunCallbacks, IPunTurnManagerCallbacks
 
     public void OnTurnTimeEnds(int turn)
     {
-        throw new System.NotImplementedException();
+        // 制限時間がないのでこちらは使わない
     }
 
     [PunRPC]
-    public void OnMyTurnEnd(int turn)
+    public void OnMyTurnEnd()
     {
         Debug.Log("相手のターンです");
+        if (!PhotonNetwork.IsMasterClient)
+        {
+            isplay = true;
+        }
     }
 }

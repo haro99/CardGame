@@ -21,7 +21,7 @@ public class Card : MonoBehaviour
 
     public void Touch()
     {
-        SE.Play();
+        //SE.Play();
         gameObject.GetComponent<SpriteRenderer>().sprite = OpenImage;
     }
 

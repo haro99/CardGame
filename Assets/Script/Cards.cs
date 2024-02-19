@@ -40,6 +40,7 @@ public class Cards : MonoBehaviour
 
     private void OnMouseDown()
     {
+        
         GameManagerPyramid.Touch(cardnumber, this.gameObject, true);
     }
 

@@ -42,6 +42,10 @@ public class SampleController : MonoBehaviourPunCallbacks
         var position = new Vector3(Random.Range(-3f, 3f), Random.Range(-3f, 3f));
         GameObject Obj = PhotonNetwork.Instantiate("Avatar", position, Quaternion.identity);
     }
+    public override void OnPlayerLeftRoom(Photon.Realtime.Player otherPlayer)
+    {
+        Debug.Log(otherPlayer + "が退出しました。ゲーム終了いたします");
+    }
 
     /// <summary>
     /// カードを配置する
@@ -50,25 +54,25 @@ public class SampleController : MonoBehaviourPunCallbacks
     {
         for(int i = 1; i <=13; i++)
         {
-            GameObject Card = PhotonNetwork.Instantiate("c" + i.ToString("00"), new Vector3(-9f + i * 1.5f, 3f, 0f), Quaternion.identity);
+            GameObject Card = PhotonNetwork.Instantiate("c" + i.ToString("00"), new Vector3(-7f + i * 1f, 3f, 0f), Quaternion.identity);
             Cards.Add(Card);
         }
         for (int i = 1; i <= 13; i++)
         {
-            GameObject Card = PhotonNetwork.Instantiate("d" + i.ToString("00"), new Vector3(-9f + i * 1.5f, 1f, 0f), Quaternion.identity);
+            GameObject Card = PhotonNetwork.Instantiate("d" + i.ToString("00"), new Vector3(-7f + i * 1f, 1f, 0f), Quaternion.identity);
             Cards.Add(Card);
         }
         for (int i = 1; i <= 13; i++)
         {
-            GameObject Card = PhotonNetwork.Instantiate("h" + i.ToString("00"), new Vector3(-9f + i * 1.5f, -1f, 0f), Quaternion.identity);
+            GameObject Card = PhotonNetwork.Instantiate("h" + i.ToString("00"), new Vector3(-7f + i * 1f, -1f, 0f), Quaternion.identity);
             Cards.Add(Card);
         }
         for (int i = 1; i <= 13; i++)
         {
-            GameObject Card = PhotonNetwork.Instantiate("s" + i.ToString("00"), new Vector3(-9f + i * 1.5f, -3f, 0f), Quaternion.identity);
+            GameObject Card = PhotonNetwork.Instantiate("s" + i.ToString("00"), new Vector3(-7f + i * 1f, -3f, 0f), Quaternion.identity);
             Cards.Add(Card);
         }
-
+        photonView.RPC(nameof(SetCard), RpcTarget.All);
         CardShuffle();
     }
 
@@ -88,6 +92,30 @@ public class SampleController : MonoBehaviourPunCallbacks
                 Cards[number].transform.position = Cards[number2].transform.position;
                 Cards[number2].transform.position = fistpos;
             }
+        }
+    }
+
+    public void CardSerach(GameObject obj)
+    {
+        int number = Cards.IndexOf(obj);
+        Debug.Log("CardNumber:" + number);
+        photonView.RPC(nameof(CardOpen), RpcTarget.All, number);
+    }
+
+    [PunRPC]
+    public void CardOpen(int cardnumber)
+    {
+        Debug.Log(cardnumber);
+        GameObject card = Cards[cardnumber];
+        card.GetComponent<Card>().Touch();
+    }
+    [PunRPC]
+    public void SetCard()
+    {
+        GameObject[] Cards = GameObject.FindGameObjectsWithTag("Card");
+        foreach(GameObject Card in Cards)
+        {
+            this.Cards.Add(Card);
         }
     }
 }

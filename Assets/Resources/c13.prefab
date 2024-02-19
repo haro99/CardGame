@@ -10,13 +10,13 @@ GameObject:
   m_Component:
   - component: {fileID: 3550729397986250865}
   - component: {fileID: 3791200495201391502}
-  - component: {fileID: 57747055651418772}
+  - component: {fileID: 4353291358799636388}
   - component: {fileID: 9043473771879364406}
   - component: {fileID: -3587114496476872967}
   - component: {fileID: 2946277294254679709}
   m_Layer: 0
   m_Name: c13
-  m_TagString: Untagged
+  m_TagString: Card
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 4695888814299889577}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 530170b8da0a86f4e87bb9d71531e0bd, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 338b8e5cb2cb1d14ab9605e94f6e5a3b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -86,7 +86,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &57747055651418772
+--- !u!114 &4353291358799636388
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -95,18 +95,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 4695888814299889577}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe2846bfbcb3dcf469760bf52a5955e6, type: 3}
+  m_Script: {fileID: 11500000, guid: 76d4a43e4c110bf43bb902d95bad9d63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GameManagerPyramid: {fileID: 0}
-  ImageNumber: {fileID: 21300000, guid: 6a92273bad3951e46b6539f832ef25de, type: 3}
-  closeImage: {fileID: 21300000, guid: e2f6223f0419dd44eb360195a1e12620, type: 3}
-  cardnumber: 13
-  classnumber: 0
-  setnumber: 0
+  StarEffect: {fileID: 0}
+  CloseImage: {fileID: 21300000, guid: e2f6223f0419dd44eb360195a1e12620, type: 3}
+  OpenImage: {fileID: 21300000, guid: 6a92273bad3951e46b6539f832ef25de, type: 3}
+  SE: {fileID: 0}
+  Colloder: {fileID: -6272689771936878936, guid: a36de379528393c479d92c4e8f91cc1d,
+    type: 3}
   number: 0
-  collider2D: {fileID: 9043473771879364406}
-  open: 0
 --- !u!61 &9043473771879364406
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -114,7 +112,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4695888814299889577}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0

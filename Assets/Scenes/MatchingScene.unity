@@ -711,6 +711,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Cards: []
+  selectcards:
+  - {fileID: 0}
+  - {fileID: 0}
+  selectnumber: 0
 --- !u!4 &2094254736
 Transform:
   m_ObjectHideFlags: 0

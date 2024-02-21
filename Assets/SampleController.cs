@@ -7,6 +7,11 @@ public class SampleController : MonoBehaviourPunCallbacks
 {
     [SerializeField]
     private List<GameObject> Cards;
+    [SerializeField]
+    private Card[] selectcards;
+    [SerializeField]
+    private int selectnumber;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -72,7 +77,7 @@ public class SampleController : MonoBehaviourPunCallbacks
             GameObject Card = PhotonNetwork.Instantiate("s" + i.ToString("00"), new Vector3(-7f + i * 1f, -3f, 0f), Quaternion.identity);
             Cards.Add(Card);
         }
-        photonView.RPC(nameof(SetCard), RpcTarget.All);
+        photonView.RPC(nameof(SetCard), RpcTarget.Others);
         CardShuffle();
     }
 
@@ -107,7 +112,16 @@ public class SampleController : MonoBehaviourPunCallbacks
     {
         Debug.Log(cardnumber);
         GameObject card = Cards[cardnumber];
-        card.GetComponent<Card>().Touch();
+        selectcards[selectnumber] = card.GetComponent<Card>();
+        selectcards[selectnumber].Touch();
+        if(selectnumber >0)
+        {
+            Debug.Log("選択したカードの判定");
+        }
+        else
+        {
+            selectnumber++;
+        }
     }
     [PunRPC]
     public void SetCard()

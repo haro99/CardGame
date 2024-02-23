@@ -43,8 +43,15 @@ public class AvatarScript : MonoBehaviourPunCallbacks, IPunTurnManagerCallbacks
                 {
                     Debug.Log(hit.collider.gameObject.name);
                     GameObject HitObject = hit.collider.gameObject;
-                    HitObject.GetComponent<Card>().Touch();
-                    GameManager.CardSerach(HitObject);
+                    if (!GameManager.CardCheck(HitObject))
+                    {
+                        HitObject.GetComponent<Card>().Touch();
+                        GameManager.CardSerach(HitObject);
+                    }
+                    else
+                    {
+                        Debug.Log("タッチしたカードです");
+                    }
                 }
             }
         }
@@ -146,13 +153,20 @@ public class AvatarScript : MonoBehaviourPunCallbacks, IPunTurnManagerCallbacks
         // 制限時間がないのでこちらは使わない
     }
 
+    public void TurnChange()
+    {
+        photonView.RPC(nameof(OnMyTurnEnd), RpcTarget.All);
+    }
+
     [PunRPC]
     public void OnMyTurnEnd()
     {
+        GameManager.CardReset();
         Debug.Log("相手のターンです");
         if (!PhotonNetwork.IsMasterClient)
         {
             isplay = true;
         }
     }
+
 }

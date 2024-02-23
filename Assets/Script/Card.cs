@@ -27,7 +27,7 @@ public class Card : MonoBehaviour
 
     public void Hide()
     {
-        SE.Play();
+        //SE.Play();
         gameObject.GetComponent<SpriteRenderer>().sprite = CloseImage;
 
     }

@@ -2,15 +2,16 @@ using Photon.Pun;
 using Photon.Realtime;
 using System.Collections.Generic;
 using UnityEngine;
-
 public class SampleController : MonoBehaviourPunCallbacks
 {
     [SerializeField]
     private List<GameObject> Cards;
     [SerializeField]
-    private Card[] selectcards;
+    private GameObject[] selectcards;
     [SerializeField]
     private int selectnumber;
+
+    private AvatarScript Player;
 
     // Start is called before the first frame update
     void Start()
@@ -45,7 +46,12 @@ public class SampleController : MonoBehaviourPunCallbacks
         Debug.Log(PhotonNetwork.CurrentRoom.PlayerCount);
         // ランダムな座標に自身のアバター（ネットワークオブジェクト）を生成する
         var position = new Vector3(Random.Range(-3f, 3f), Random.Range(-3f, 3f));
-        GameObject Obj = PhotonNetwork.Instantiate("Avatar", position, Quaternion.identity);
+        // すでに配置されてたら生成しない
+        if (Player == null)
+        {
+            GameObject Obj = PhotonNetwork.Instantiate("Avatar", position, Quaternion.identity);
+            Player = Obj.GetComponent<AvatarScript>();
+        }
     }
     public override void OnPlayerLeftRoom(Photon.Realtime.Player otherPlayer)
     {
@@ -104,7 +110,22 @@ public class SampleController : MonoBehaviourPunCallbacks
     {
         int number = Cards.IndexOf(obj);
         Debug.Log("CardNumber:" + number);
-        photonView.RPC(nameof(CardOpen), RpcTarget.All, number);
+        selectcards[selectnumber] = obj;
+        selectnumber++;
+        // 相手に伝えるだけに使う
+        photonView.RPC(nameof(CardOpen), RpcTarget.Others, number);
+    }
+
+    public bool CardCheck(GameObject obj)
+    {
+        if (selectcards[0] == obj || selectcards[1] == obj)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     [PunRPC]
@@ -112,11 +133,18 @@ public class SampleController : MonoBehaviourPunCallbacks
     {
         Debug.Log(cardnumber);
         GameObject card = Cards[cardnumber];
-        selectcards[selectnumber] = card.GetComponent<Card>();
-        selectcards[selectnumber].Touch();
-        if(selectnumber >0)
+        if (selectnumber > 0 && card == Cards[0])
+        {
+            return;
+        }
+
+        selectcards[selectnumber] = card;
+        selectcards[selectnumber].GetComponent<Card>().Touch();
+        if (selectnumber > 0)
         {
             Debug.Log("選択したカードの判定");
+            // 相手のターンにする
+            Player.TurnChange();
         }
         else
         {
@@ -131,5 +159,16 @@ public class SampleController : MonoBehaviourPunCallbacks
         {
             this.Cards.Add(Card);
         }
+    }
+
+    public void CardReset()
+    {
+        for(int i = 0;  i< selectcards.Length; i++)
+        {
+            selectcards[i].GetComponent<Card>().Hide();
+            selectcards[i] = null;
+        }
+
+        selectnumber = 0;
     }
 }

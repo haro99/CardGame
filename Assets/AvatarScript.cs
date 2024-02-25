@@ -10,7 +10,9 @@ public class AvatarScript : MonoBehaviourPunCallbacks, IPunTurnManagerCallbacks
 {
     private PunTurnManager punTurnManager = default;
     private SampleController GameManager;
+    [SerializeField]
     private bool isplay;
+    public int currentturn;
 
     void Awake()
     {
@@ -25,15 +27,44 @@ public class AvatarScript : MonoBehaviourPunCallbacks, IPunTurnManagerCallbacks
         Button button = GameObject.Find("NextTurn").GetComponent<Button>();
         button.onClick.AddListener(OnClickButton);
         SetupTurnManager();
+
+        Debug.Log(PhotonNetwork.LocalPlayer.UserId);
     }
 
     private void Update()
     {
-        if(isplay)
+        if(PhotonNetwork.IsMasterClient && (currentturn % 2) == 1)
         {
             if(Input.GetMouseButtonDown(0))
             {
-                Debug.Log("Click!");
+                Debug.Log("Player1 Click!");
+                //レイの生成
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+                RaycastHit2D hit = Physics2D.Raycast((Vector2)ray.origin, ray.direction, 12f);
+
+                if (hit.collider)
+                {
+                    Debug.Log(hit.collider.gameObject.name);
+                    GameObject HitObject = hit.collider.gameObject;
+                    if (!GameManager.CardCheck(HitObject))
+                    {
+                        HitObject.GetComponent<Card>().Touch();
+                        GameManager.CardSerach(HitObject);
+                    }
+                    else
+                    {
+                        Debug.Log("タッチしたカードです");
+                    }
+                }
+            }
+        }
+
+        if (!PhotonNetwork.IsMasterClient && (currentturn % 2) == 0)
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                Debug.Log("Player2 Click!");
                 //レイの生成
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
@@ -100,6 +131,7 @@ public class AvatarScript : MonoBehaviourPunCallbacks, IPunTurnManagerCallbacks
 
     public void OnTurnBegins(int turn)
     {
+        currentturn = turn;
         Debug.Log("ターンを開始します" + turn);
         if (PhotonNetwork.IsMasterClient)
         {
@@ -155,13 +187,19 @@ public class AvatarScript : MonoBehaviourPunCallbacks, IPunTurnManagerCallbacks
 
     public void TurnChange()
     {
-        photonView.RPC(nameof(OnMyTurnEnd), RpcTarget.All);
+        isplay =false;
+        photonView.RPC(nameof(OnMyTurnEnd), RpcTarget.Others);
+    }
+
+    public void TurnEnd()
+    {
+        isplay = false;
     }
 
     [PunRPC]
     public void OnMyTurnEnd()
     {
-        GameManager.CardReset();
+        //GameManager.CardReset();
         Debug.Log("相手のターンです");
         if (!PhotonNetwork.IsMasterClient)
         {

@@ -95,6 +95,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 913e87604cd3148489a77b80fc5f97a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isplay: 0
+  currentturn: 0
 --- !u!114 &8543120428243738491
 MonoBehaviour:
   m_ObjectHideFlags: 0

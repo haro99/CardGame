@@ -10,7 +10,7 @@ public class SampleController : MonoBehaviourPunCallbacks
     private GameObject[] selectcards;
     [SerializeField]
     private int selectnumber;
-
+    public int player1count, player2count;
     private AvatarScript Player;
 
     // Start is called before the first frame update
@@ -110,10 +110,10 @@ public class SampleController : MonoBehaviourPunCallbacks
     {
         int number = Cards.IndexOf(obj);
         Debug.Log("CardNumber:" + number);
-        selectcards[selectnumber] = obj;
-        selectnumber++;
-        // ‘ŠŽè‚É“`‚¦‚é‚¾‚¯‚ÉŽg‚¤
-        photonView.RPC(nameof(CardOpen), RpcTarget.Others, number);
+        //selectcards[selectnumber] = obj;
+        //selectnumber++;
+        // ‘Sˆõ‚É“`‚¦‚é
+        photonView.RPC(nameof(CardOpen), RpcTarget.All, number);
     }
 
     public bool CardCheck(GameObject obj)
@@ -158,6 +158,30 @@ public class SampleController : MonoBehaviourPunCallbacks
         foreach(GameObject Card in Cards)
         {
             this.Cards.Add(Card);
+        }
+    }
+
+    private bool Judge()
+    {
+        int card1number = selectcards[0].GetComponent<Card>().number;
+        int card2number = selectcards[1].GetComponent<Card>().number;
+
+        if(card1number == card2number)
+        {
+            if(PhotonNetwork.IsMasterClient)
+            {
+                player1count += 2;
+            }
+            else
+            {
+                player2count += 2;
+            }
+
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
 

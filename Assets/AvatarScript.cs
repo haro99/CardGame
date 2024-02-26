@@ -25,7 +25,7 @@ public class AvatarScript : MonoBehaviourPunCallbacks, IPunTurnManagerCallbacks
         this.punTurnManager = this.gameObject.AddComponent<PunTurnManager>();//PunTurnManagerをコンポーネントに追加
         GameManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<SampleController>();
         Button button = GameObject.Find("NextTurn").GetComponent<Button>();
-        button.onClick.AddListener(OnClickButton);
+        button.onClick.AddListener(() => OnTurnCompleted(0));
         SetupTurnManager();
 
         Debug.Log(PhotonNetwork.LocalPlayer.UserId);
@@ -33,55 +33,60 @@ public class AvatarScript : MonoBehaviourPunCallbacks, IPunTurnManagerCallbacks
 
     private void Update()
     {
-        if(PhotonNetwork.IsMasterClient && (currentturn % 2) == 1)
+        if (GameManager.turnend)
         {
-            if(Input.GetMouseButtonDown(0))
+
+
+            if (PhotonNetwork.IsMasterClient && (currentturn % 2) == 1)
             {
-                Debug.Log("Player1 Click!");
-                //レイの生成
-                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-                RaycastHit2D hit = Physics2D.Raycast((Vector2)ray.origin, ray.direction, 12f);
-
-                if (hit.collider)
+                if (Input.GetMouseButtonDown(0))
                 {
-                    Debug.Log(hit.collider.gameObject.name);
-                    GameObject HitObject = hit.collider.gameObject;
-                    if (!GameManager.CardCheck(HitObject))
+                    Debug.Log("Player1 Click!");
+                    //レイの生成
+                    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+                    RaycastHit2D hit = Physics2D.Raycast((Vector2)ray.origin, ray.direction, 12f);
+
+                    if (hit.collider)
                     {
-                        HitObject.GetComponent<Card>().Touch();
-                        GameManager.CardSerach(HitObject);
-                    }
-                    else
-                    {
-                        Debug.Log("タッチしたカードです");
+                        Debug.Log(hit.collider.gameObject.name);
+                        GameObject HitObject = hit.collider.gameObject;
+                        if (!GameManager.CardCheck(HitObject))
+                        {
+                            HitObject.GetComponent<Card>().Touch();
+                            GameManager.CardSerach(HitObject);
+                        }
+                        else
+                        {
+                            Debug.Log("タッチしたカードです");
+                        }
                     }
                 }
             }
-        }
 
-        if (!PhotonNetwork.IsMasterClient && (currentturn % 2) == 0)
-        {
-            if (Input.GetMouseButtonDown(0))
+            if (!PhotonNetwork.IsMasterClient && (currentturn % 2) == 0)
             {
-                Debug.Log("Player2 Click!");
-                //レイの生成
-                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-                RaycastHit2D hit = Physics2D.Raycast((Vector2)ray.origin, ray.direction, 12f);
-
-                if (hit.collider)
+                if (Input.GetMouseButtonDown(0))
                 {
-                    Debug.Log(hit.collider.gameObject.name);
-                    GameObject HitObject = hit.collider.gameObject;
-                    if (!GameManager.CardCheck(HitObject))
+                    Debug.Log("Player2 Click!");
+                    //レイの生成
+                    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+                    RaycastHit2D hit = Physics2D.Raycast((Vector2)ray.origin, ray.direction, 12f);
+
+                    if (hit.collider)
                     {
-                        HitObject.GetComponent<Card>().Touch();
-                        GameManager.CardSerach(HitObject);
-                    }
-                    else
-                    {
-                        Debug.Log("タッチしたカードです");
+                        Debug.Log(hit.collider.gameObject.name);
+                        GameObject HitObject = hit.collider.gameObject;
+                        if (!GameManager.CardCheck(HitObject))
+                        {
+                            HitObject.GetComponent<Card>().Touch();
+                            GameManager.CardSerach(HitObject);
+                        }
+                        else
+                        {
+                            Debug.Log("タッチしたカードです");
+                        }
                     }
                 }
             }
@@ -132,6 +137,7 @@ public class AvatarScript : MonoBehaviourPunCallbacks, IPunTurnManagerCallbacks
     public void OnTurnBegins(int turn)
     {
         currentturn = turn;
+        GameManager.turnend = true;
         Debug.Log("ターンを開始します" + turn);
         if (PhotonNetwork.IsMasterClient)
         {

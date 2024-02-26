@@ -12,11 +12,13 @@ public class SampleController : MonoBehaviourPunCallbacks
     private int selectnumber;
     public int player1count, player2count;
     private AvatarScript Player;
+    public bool turnend;
 
     // Start is called before the first frame update
     void Start()
     {
         Debug.Log("マッチング中");
+        turnend = false;
         PhotonNetwork.NickName = "Player";
         // PhotonServerSettingsの設定内容を使ってマスターサーバーへ接続する
         PhotonNetwork.ConnectUsingSettings();
@@ -143,8 +145,14 @@ public class SampleController : MonoBehaviourPunCallbacks
         if (selectnumber > 0)
         {
             Debug.Log("選択したカードの判定");
-            // 相手のターンにする
-            Player.TurnChange();
+
+            if (!Judge())
+            {
+                turnend = false;
+                // 相手のターンにする
+                Player.OnConnected();
+                CardReset();
+            }
         }
         else
         {
@@ -168,6 +176,7 @@ public class SampleController : MonoBehaviourPunCallbacks
 
         if(card1number == card2number)
         {
+            Debug.Log("同じカードが揃いました！");
             if(PhotonNetwork.IsMasterClient)
             {
                 player1count += 2;
@@ -176,11 +185,20 @@ public class SampleController : MonoBehaviourPunCallbacks
             {
                 player2count += 2;
             }
+            selectcards[0].GetComponent<Card>().MatchProcess();
+            selectcards[1].GetComponent<Card>().MatchProcess();
+
+            for (int i = 0;i < selectcards.Length;i++)
+            {
+                selectcards[i] = null;
+            }
+            selectnumber = 0;
 
             return true;
         }
         else
         {
+            Debug.Log("カードが一致しませんでした");
             return false;
         }
     }

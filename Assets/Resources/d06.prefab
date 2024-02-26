@@ -103,7 +103,7 @@ MonoBehaviour:
   OpenImage: {fileID: 21300000, guid: 4bfb9a3a87b5156408a6c16a2442498c, type: 3}
   SE: {fileID: 0}
   Colloder: {fileID: -6272689771936878936}
-  number: 0
+  number: 6
 --- !u!61 &-6272689771936878936
 BoxCollider2D:
   m_ObjectHideFlags: 0

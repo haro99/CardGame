@@ -2,6 +2,9 @@ using Photon.Pun;
 using Photon.Realtime;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
+
 public class SampleController : MonoBehaviourPunCallbacks
 {
     [SerializeField]
@@ -13,6 +16,8 @@ public class SampleController : MonoBehaviourPunCallbacks
     public int player1count, player2count;
     private AvatarScript Player;
     public bool turnend;
+    [SerializeField]
+    private Text player1text, player2text;
 
     // Start is called before the first frame update
     void Start()
@@ -150,7 +155,7 @@ public class SampleController : MonoBehaviourPunCallbacks
             {
                 turnend = false;
                 // ëäéËÇÃÉ^Å[ÉìÇ…Ç∑ÇÈ
-                Player.OnConnected();
+                Player.OnTurnCompleted(0);
                 CardReset();
             }
         }
@@ -187,7 +192,8 @@ public class SampleController : MonoBehaviourPunCallbacks
             }
             selectcards[0].GetComponent<Card>().MatchProcess();
             selectcards[1].GetComponent<Card>().MatchProcess();
-
+            player1text.text = player1count.ToString();
+            player2text.text = player2count.ToString();
             for (int i = 0;i < selectcards.Length;i++)
             {
                 selectcards[i] = null;

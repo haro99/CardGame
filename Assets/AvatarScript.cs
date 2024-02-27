@@ -118,7 +118,7 @@ public class AvatarScript : MonoBehaviourPunCallbacks, IPunTurnManagerCallbacks
         if (PhotonNetwork.CurrentRoom.PlayerCount >= 1)
         {
             Debug.Log("プレイヤーが揃いました！ゲームを開始します");
-            GameObject.Find("MatchingText").SetActive(false);
+            //GameObject.Find("MatchingText").SetActive(false);
 
             if (PhotonNetwork.IsMasterClient)
             {
@@ -136,6 +136,8 @@ public class AvatarScript : MonoBehaviourPunCallbacks, IPunTurnManagerCallbacks
 
     public void OnTurnBegins(int turn)
     {
+        GameObject.Find("MatchingText").SetActive(false);
+
         currentturn = turn;
         GameManager.turnend = true;
         Debug.Log("ターンを開始します" + turn);

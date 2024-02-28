@@ -13,6 +13,7 @@ public class AvatarScript : MonoBehaviourPunCallbacks, IPunTurnManagerCallbacks
     [SerializeField]
     private bool isplay;
     public int currentturn;
+    public Text CurrentText;
 
     void Awake()
     {
@@ -22,6 +23,7 @@ public class AvatarScript : MonoBehaviourPunCallbacks, IPunTurnManagerCallbacks
     void Start()
     {
         isplay = false;
+        CurrentText = GameObject.Find("CurrentTurn").GetComponent<Text>();
         this.punTurnManager = this.gameObject.AddComponent<PunTurnManager>();//PunTurnManagerをコンポーネントに追加
         GameManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<SampleController>();
         Button button = GameObject.Find("NextTurn").GetComponent<Button>();
@@ -136,20 +138,40 @@ public class AvatarScript : MonoBehaviourPunCallbacks, IPunTurnManagerCallbacks
 
     public void OnTurnBegins(int turn)
     {
-        GameObject.Find("MatchingText").SetActive(false);
+        GameObject obj = GameObject.Find("MatchingText");
+        if(obj)
+        {
+            obj.SetActive(false);
+        }
 
         currentturn = turn;
         GameManager.turnend = true;
         Debug.Log("ターンを開始します" + turn);
         if (PhotonNetwork.IsMasterClient)
         {
-            Debug.Log("クライアントマスターのターンです");
-            isplay = true;
+            if (PhotonNetwork.IsMasterClient && (currentturn % 2) == 1)
+            {
+                Debug.Log("クライアントマスターです");
+                CurrentText.text = "あなたのターンです";
+            }
+            else
+            {
+                Debug.Log("クライアントマスターではありません");
+                CurrentText.text = "あいてのターンです";
+            }
         }
         else
         {
-            isplay = false;
+            if(currentturn % 2 == 0)
+            {
+                CurrentText.text = "あなたのターンです";
+            }
+            else
+            {
+                CurrentText.text = "あいてのターンです";
+            }
         }
+
     }
 
     /// <summary>

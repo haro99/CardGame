@@ -46,6 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isplay: 0
   currentturn: 0
+  CurrentText: {fileID: 0}
 --- !u!114 &8543120428243738491
 MonoBehaviour:
   m_ObjectHideFlags: 0

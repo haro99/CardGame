@@ -182,16 +182,34 @@ public class SampleController : MonoBehaviourPunCallbacks
         if(card1number == card2number)
         {
             Debug.Log("同じカードが揃いました！");
+
             if(PhotonNetwork.IsMasterClient)
             {
-                player1count += 2;
+                if ((Player.currentturn % 2) == 1)
+                {
+                    player1count += 2;
+                }
+                else
+                {
+                    player2count += 2;
+
+                }
             }
             else
             {
-                player2count += 2;
+                if((Player.currentturn % 2) ==0)
+                {
+                    player1count += 2;
+                }
+                else
+                {
+                    player2count += 2;
+                }
             }
             selectcards[0].GetComponent<Card>().MatchProcess();
             selectcards[1].GetComponent<Card>().MatchProcess();
+            Cards.Remove(selectcards[0]);
+            Cards.Remove(selectcards[1]);
             player1text.text = player1count.ToString();
             player2text.text = player2count.ToString();
             for (int i = 0;i < selectcards.Length;i++)

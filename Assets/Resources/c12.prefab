@@ -104,7 +104,7 @@ MonoBehaviour:
   SE: {fileID: 0}
   Colloder: {fileID: -6272689771936878936, guid: a36de379528393c479d92c4e8f91cc1d,
     type: 3}
-  number: 0
+  number: 12
 --- !u!61 &5768343163536158251
 BoxCollider2D:
   m_ObjectHideFlags: 0

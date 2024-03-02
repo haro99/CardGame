@@ -17,7 +17,9 @@ public class SampleController : MonoBehaviourPunCallbacks
     private AvatarScript Player;
     public bool turnend;
     [SerializeField]
-    private Text player1text, player2text;
+    private Text player1text, player2text, resulttext;
+    [SerializeField]
+    private GameObject Result;
 
     // Start is called before the first frame update
     void Start()
@@ -140,7 +142,8 @@ public class SampleController : MonoBehaviourPunCallbacks
     {
         Debug.Log(cardnumber);
         GameObject card = Cards[cardnumber];
-        if (selectnumber > 0 && card == Cards[0])
+        Debug.Log(card);
+        if (selectnumber > 0 && card == selectcards[0])
         {
             return;
         }
@@ -158,9 +161,27 @@ public class SampleController : MonoBehaviourPunCallbacks
                 Player.OnTurnCompleted(0);
                 CardReset();
             }
+
+            if(Cards.Count == 0)
+            {
+                if(player1count>player2count)
+                {
+                    resulttext.text = "‚ ‚È‚½‚ÌŸ‚¿‚Å‚·";
+                }
+                else if(player2count>player1count)
+                {
+                    resulttext.text = "‚ ‚È‚½‚Ì•‰‚¯‚Å‚·";
+                }
+                else
+                {
+                    resulttext.text = "ˆø‚«•ª‚¯‚Å‚·";
+                }
+                    Result.SetActive(true);
+            }
         }
         else
         {
+            Debug.Log("ƒJƒEƒ“ƒg");
             selectnumber++;
         }
     }

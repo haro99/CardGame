@@ -3,6 +3,7 @@ using Photon.Realtime;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 
 public class SampleController : MonoBehaviourPunCallbacks
@@ -19,7 +20,7 @@ public class SampleController : MonoBehaviourPunCallbacks
     [SerializeField]
     private Text player1text, player2text, resulttext;
     [SerializeField]
-    private GameObject Result;
+    private GameObject Result, PlayerLogOut;
 
     // Start is called before the first frame update
     void Start()
@@ -64,7 +65,8 @@ public class SampleController : MonoBehaviourPunCallbacks
     }
     public override void OnPlayerLeftRoom(Photon.Realtime.Player otherPlayer)
     {
-        Debug.Log(otherPlayer + "が退出しました。ゲーム終了いたします");
+        Debug.Log(otherPlayer + "が退出しました。タイトルに戻ります");
+        PlayerLogOut.SetActive(true);
     }
 
     /// <summary>
@@ -257,5 +259,10 @@ public class SampleController : MonoBehaviourPunCallbacks
         }
 
         selectnumber = 0;
+    }
+
+    public void SceneChange()
+    {
+        SceneManager.LoadScene(0);
     }
 }

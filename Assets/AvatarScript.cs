@@ -26,8 +26,8 @@ public class AvatarScript : MonoBehaviourPunCallbacks, IPunTurnManagerCallbacks
         CurrentText = GameObject.Find("CurrentTurn").GetComponent<Text>();
         this.punTurnManager = this.gameObject.AddComponent<PunTurnManager>();//PunTurnManagerをコンポーネントに追加
         GameManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<SampleController>();
-        Button button = GameObject.Find("NextTurn").GetComponent<Button>();
-        button.onClick.AddListener(() => OnTurnCompleted(0));
+        //Button button = GameObject.Find("NextTurn").GetComponent<Button>();
+        //button.onClick.AddListener(() => OnTurnCompleted(0));
         SetupTurnManager();
 
         Debug.Log(PhotonNetwork.LocalPlayer.UserId);
@@ -120,7 +120,7 @@ public class AvatarScript : MonoBehaviourPunCallbacks, IPunTurnManagerCallbacks
         if (PhotonNetwork.CurrentRoom.PlayerCount >= 1)
         {
             Debug.Log("プレイヤーが揃いました！ゲームを開始します");
-            //GameObject.Find("MatchingText").SetActive(false);
+            GameObject.Find("MatchingWait").SetActive(false);
 
             if (PhotonNetwork.IsMasterClient)
             {

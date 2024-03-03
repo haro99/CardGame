@@ -39,6 +39,6 @@ public class Card : MonoBehaviour
         //アニメーションか何か
 
         //エフェクト演出を出す
-        //Instantiate(StarEffect, transform.position + new Vector3(0f, 0f, -1f), Quaternion.identity);
+        Instantiate(StarEffect, transform.position + new Vector3(0f, 0f, -1f), Quaternion.identity);
     }
 }

@@ -66,6 +66,10 @@ public class SampleController : MonoBehaviourPunCallbacks
     public override void OnPlayerLeftRoom(Photon.Realtime.Player otherPlayer)
     {
         Debug.Log(otherPlayer + "が退出しました。タイトルに戻ります");
+        if(PhotonNetwork.IsMasterClient)
+        {
+            PhotonNetwork.LeaveRoom();
+        }
         PlayerLogOut.SetActive(true);
     }
 

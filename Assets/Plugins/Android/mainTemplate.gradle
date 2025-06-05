@@ -1,0 +1,3 @@
+aaptOptions {
+    noCompress = ['.ext1', '.ext2'] + unityStreamingAssets.tokenize(',')
+}

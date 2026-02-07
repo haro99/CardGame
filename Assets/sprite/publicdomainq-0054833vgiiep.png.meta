@@ -159,7 +159,7 @@ TextureImporter:
       213: 869889013798954787
     second: publicdomainq-0054833vgiiep_51
   externalObjects: {}
-  serializedVersion: 10
+  serializedVersion: 13
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -176,9 +176,12 @@ TextureImporter:
     externalNormalMap: 0
     heightScale: 0.25
     normalMapFilter: 0
+    flipGreenChannel: 0
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -187,9 +190,9 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: -1
-    aniso: -1
-    mipBias: -100
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -210,11 +213,17 @@ TextureImporter:
   textureType: 8
   textureShape: 1
   singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
   maxTextureSizeSet: 0
   compressionQualitySet: 0
   textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 1
+  swizzle: 50462976
+  cookieLightType: 1
   platformSettings:
-  - serializedVersion: 2
+  - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -224,8 +233,10 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
-  - serializedVersion: 2
+    forceMaximumCompressionQuality_BC6H_BC7: 1
+  - serializedVersion: 3
     buildTarget: Standalone
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -235,8 +246,10 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
-  - serializedVersion: 2
+    forceMaximumCompressionQuality_BC6H_BC7: 1
+  - serializedVersion: 3
     buildTarget: Android
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -246,8 +259,10 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
-  - serializedVersion: 2
+    forceMaximumCompressionQuality_BC6H_BC7: 1
+  - serializedVersion: 3
     buildTarget: WebGL
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -257,7 +272,9 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 1
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -1363,9 +1380,61 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-  spritePackingTag: 
+    nameFileIdTable:
+      publicdomainq-0054833vgiiep_0: 7869593062997343579
+      publicdomainq-0054833vgiiep_1: 2063852164458107210
+      publicdomainq-0054833vgiiep_10: 71043996988515053
+      publicdomainq-0054833vgiiep_11: 5437216504168894477
+      publicdomainq-0054833vgiiep_12: 8085076858964207673
+      publicdomainq-0054833vgiiep_13: 8203883724395171674
+      publicdomainq-0054833vgiiep_14: -8104465361916914640
+      publicdomainq-0054833vgiiep_15: 4463432256845644740
+      publicdomainq-0054833vgiiep_16: -7259767048205727657
+      publicdomainq-0054833vgiiep_17: 301835041628170165
+      publicdomainq-0054833vgiiep_18: -5864314922617284926
+      publicdomainq-0054833vgiiep_19: -5087677814138643877
+      publicdomainq-0054833vgiiep_2: 1120685476403207626
+      publicdomainq-0054833vgiiep_20: -2514254628291730061
+      publicdomainq-0054833vgiiep_21: 2587080086075705565
+      publicdomainq-0054833vgiiep_22: -2137862905580104260
+      publicdomainq-0054833vgiiep_23: -5721040940454466159
+      publicdomainq-0054833vgiiep_24: -5178834151264241019
+      publicdomainq-0054833vgiiep_25: -7947515605291663853
+      publicdomainq-0054833vgiiep_26: -3605880750520174905
+      publicdomainq-0054833vgiiep_27: 6958314100225998230
+      publicdomainq-0054833vgiiep_28: 3848708006296060109
+      publicdomainq-0054833vgiiep_29: -3836747928714455782
+      publicdomainq-0054833vgiiep_3: -2237856172770016311
+      publicdomainq-0054833vgiiep_30: -8546084504395582578
+      publicdomainq-0054833vgiiep_31: 7691239663685152824
+      publicdomainq-0054833vgiiep_32: -2399882866025588457
+      publicdomainq-0054833vgiiep_33: 1700302938294560886
+      publicdomainq-0054833vgiiep_34: 8479852767889974169
+      publicdomainq-0054833vgiiep_35: -7508996982115217258
+      publicdomainq-0054833vgiiep_36: -7282000847328713835
+      publicdomainq-0054833vgiiep_37: 1454777255014316811
+      publicdomainq-0054833vgiiep_38: -8206379604201765383
+      publicdomainq-0054833vgiiep_39: -2238177864300202911
+      publicdomainq-0054833vgiiep_4: 5155314905648599142
+      publicdomainq-0054833vgiiep_40: 2487423487436027297
+      publicdomainq-0054833vgiiep_41: 5850860648464367814
+      publicdomainq-0054833vgiiep_42: 1412587983625203935
+      publicdomainq-0054833vgiiep_43: 1915745463449423086
+      publicdomainq-0054833vgiiep_44: 4951714795718220635
+      publicdomainq-0054833vgiiep_45: 4053703043125716503
+      publicdomainq-0054833vgiiep_46: -5498060322310766583
+      publicdomainq-0054833vgiiep_47: 1603689983694365197
+      publicdomainq-0054833vgiiep_48: 3700337706562424884
+      publicdomainq-0054833vgiiep_49: -6648611449712013455
+      publicdomainq-0054833vgiiep_5: 2321096312794005909
+      publicdomainq-0054833vgiiep_50: 6103175686844960558
+      publicdomainq-0054833vgiiep_51: 869889013798954787
+      publicdomainq-0054833vgiiep_6: -1534001260926875053
+      publicdomainq-0054833vgiiep_7: -1475498277850436076
+      publicdomainq-0054833vgiiep_8: 9083105734306808974
+      publicdomainq-0054833vgiiep_9: 4164499126222129587
+  mipmapLimitGroupName: 
   pSDRemoveMatte: 0
-  pSDShowRemoveMatteOption: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 

@@ -21,6 +21,8 @@ public class GolfManager : MonoBehaviour
         Datas = new List<Data>();
 
         Data data = new Data();
+
+        // カードを登録
         for (int i = 0; i < Sprites.Length; i++)
         {
             data.number = i % 13 + 1;
@@ -30,9 +32,10 @@ public class GolfManager : MonoBehaviour
             Datas.Add(data);
         }
 
+        // カードをシャッフル
         for (int i = 0; i < 50; i++)
         {
-            int number = Random.Range(0, Datas.Count), number2 = Random.Range(0, Datas.Count);
+            int number = Random.Range(0, Datas.Count),  number2 = Random.Range(0, Datas.Count);
             Data data1 = Datas[number];
             Datas[number] = Datas[number2];
             Datas[number2] = data1;
